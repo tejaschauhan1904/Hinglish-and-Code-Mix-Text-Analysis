@@ -1,3 +1,11 @@
-streamlit>=1.36
-pandas>=2.0
-flask>=3.0
+# Hinglish Text Analyzer & NLP Suite Dependencies
+# Python 3.8+ compatible
+
+# Core Web Framework & REST API Backend
+Flask>=3.0.0
+
+# Dataset Manipulation & Corpus Processing
+pandas>=2.0.0
+
+# Alternative Interactive Streamlit Dashboard UI
+streamlit>=1.36.0

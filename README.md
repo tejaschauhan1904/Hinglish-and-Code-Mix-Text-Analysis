@@ -29,9 +29,9 @@ A comprehensive NLP system that analyzes **Hindi-English code-mixed (Hinglish) t
    - Multi-tiered translation: Direct dataset lookup $\rightarrow$ Semantic similarity alignment $\rightarrow$ Multi-word phrase/idiom substitution $\rightarrow$ Bilingual lexicon $\rightarrow$ Fluency post-processing.
    - Backed by a 55+ sentence parallel translation dataset (`data/hinglish_translation_dataset.csv`).
 
-6. **Interactive Streamlit Web UI:**
-   - Left sidebar navigation allowing smooth toggling between all individual feature modules or a unified **All-in-One Dashboard**.
-   - Built-in **Dataset Explorer** to search and inspect all newly curated datasets.
+6. **Dual User Interfaces:**
+   - **Modern Web Studio (Recommended):** High-performance glassmorphic UI built with HTML5, CSS3, and JavaScript, backed by a Flask REST API.
+   - **Streamlit Dashboard (Alternative):** Interactive multi-tab data science dashboard with feature navigation and built-in **Dataset Explorer**.
 
 ---
 
@@ -48,7 +48,7 @@ Tokenization (Regex)
 ├── Sentiment Analysis (Keyword Lexicon + Negation Inversion + Intensifiers)
 └── Hinglish-to-English Translation (Dataset Match + Phrase & Lexical Rules)
    ↓
-Streamlit Interactive Dashboard (Feature Toggles in Sidebar)
+Output Delivery (Flask REST API / Modern Web UI / Streamlit Dashboard)
 ```
 
 ---
@@ -56,16 +56,16 @@ Streamlit Interactive Dashboard (Feature Toggles in Sidebar)
 ## 📁 Project Structure
 
 ```text
-Hinglish_text_analyzer/
+Hinglish-and-Code-Mix-Text-Analysis/
 │
-├── run.py                             # Root application launcher
-├── requirements.txt                   # Project dependencies
-├── README.md                          # Project documentation
+├── run.py                             # Root application launcher (Flask / Streamlit / Tests)
+├── requirements.txt                   # Project dependencies (Flask, pandas, streamlit)
+├── README.md                          # Comprehensive documentation & setup guide
 │
-├── frontend/                          # Modern Web UI (HTML5, CSS3, JavaScript)
+├── frontend/                          # Modern Web UI (HTML5, Vanilla CSS3, JavaScript)
 │   ├── index.html                     # Responsive glassmorphic layout
 │   ├── style.css                      # Design system, tokens & animations
-│   └── app.js                         # Dynamic client-side logic & API calls
+│   └── app.js                         # Dynamic client-side logic & API integration
 │
 ├── backend/                           # Python NLP & API Architecture
 │   ├── __init__.py                    # Package initialization & exports
@@ -86,54 +86,175 @@ Hinglish_text_analyzer/
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack & Requirements
 
-- **Backend:** Python, Flask, Pandas, Regex (`re`)
-- **Frontend:** Semantic HTML5, Vanilla CSS3 (Glassmorphism & Micro-animations), JavaScript (ES6+ Fetch)
-- **Alternative UI:** Streamlit
-- **NLP Methodology:** Lexical & rule-based NLP, gazetteers, morphology heuristics, parallel corpus retrieval
+- **Python Version:** Python 3.8+ (tested on Python 3.8, 3.9, 3.10, 3.11, 3.12, 3.13)
+- **Backend Framework:** Flask 3.0+
+- **Data Processing:** Pandas 2.0+
+- **Dashboard UI:** Streamlit 1.36+
+- **Frontend:** Semantic HTML5, Vanilla CSS3 (Glassmorphism, CSS Grid/Flexbox), JavaScript (Fetch API)
+- **Zero Heavy ML Bloat:** Fast, 100% offline, lexical & rule-based pipeline (no GPU or paid API keys needed)
 
 ---
 
-## ▶️ How to Run
+## 📥 Installation & Setup
 
-### 1. Modern Web Studio (HTML/CSS/JS) — Recommended ⭐
+Follow these step-by-step instructions to clone and set up the repository on your local machine.
+
+### Prerequisites
+
+Ensure you have the following installed:
+- [Git](https://git-scm.com/downloads)
+- [Python 3.8 or higher](https://www.python.org/downloads/)
+- `pip` (Python package installer, bundled with Python)
+
+---
+
+### Step 1: Clone the Repository
+
+Open your terminal or command prompt and clone the repository:
 
 ```bash
-# Starts on http://localhost:8000
-python run.py
-
-# Or specify a custom port:
-python run.py 3000
+git clone https://github.com/tejaschauhan1904/Hinglish-and-Code-Mix-Text-Analysis.git
+cd Hinglish-and-Code-Mix-Text-Analysis
 ```
-Open **`http://localhost:8000`** in your browser.
 
-### 2. Streamlit Dashboard (Alternative)
+---
+
+### Step 2: Create and Activate a Virtual Environment
+
+It is strongly recommended to use a virtual environment to isolate project dependencies.
+
+#### On Windows (PowerShell):
+```powershell
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+.\venv\Scripts\Activate.ps1
+```
+
+> **Note for PowerShell users:** If you see an `Execution_Policies` script restriction error, run:
+> ```powershell
+> Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+> ```
+> and re-run `.\venv\Scripts\Activate.ps1`.
+
+#### On Windows (Command Prompt `cmd.exe`):
+```cmd
+python -m venv venv
+venv\Scripts\activate.bat
+```
+
+#### On macOS / Linux:
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+---
+
+### Step 3: Install Dependencies
+
+With the virtual environment activated, install the required packages:
+
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+---
+
+## ▶️ Running the Application
+
+You can run the application in three different modes using `run.py`:
+
+### 1. Modern Web Studio (Recommended ⭐)
+
+Launches the fast Flask REST API server and serves the responsive glassmorphic web interface.
+
+```bash
+python run.py
+```
+
+- **Default URL:** Open **[http://localhost:8000](http://localhost:8000)** in your browser.
+- **Custom Port:** You can optionally pass a custom port as an argument:
+  ```bash
+  python run.py 3000
+  ```
+  *(Then open [http://localhost:3000](http://localhost:3000))*
+
+---
+
+### 2. Streamlit Interactive Dashboard (Alternative UI)
+
+Launches the multi-tab Streamlit data science application with built-in dataset explorer.
 
 ```bash
 python run.py --streamlit
 ```
-Open **`http://localhost:8501`** in your browser.
 
-### 3. Run Command-Line Tests
+- **Default URL:** Open **[http://localhost:8501](http://localhost:8501)** in your browser.
+
+---
+
+### 3. Automated CLI Test Suite
+
+Runs a suite of sanity checks and sample sentence validations across all modules:
 
 ```bash
 python run.py --test
 ```
 
+Expected output includes tokenization, language ratios, POS tags, NER tags (with temporal inference for words like *kal*), sentiment polarity scores, and parallel translations.
+
 ---
 
-## 🧪 Examples
+## 🌐 REST API Endpoints
 
-| Feature | Input Text | Output |
+When running the Flask backend (`python run.py`), the following REST endpoints are available:
+
+| Endpoint | Method | Payload / Params | Description |
+| :--- | :--- | :--- | :--- |
+| `/` | `GET` | None | Serves the Modern Web Studio UI |
+| `/api/analyze` | `POST` | `{"text": "Mujhe kal college jaana hai bro"}` | Complete unified NLP analysis (LID, POS, NER, Sentiment, Translation) |
+| `/api/ner` | `POST` | `{"text": "Rahul kal Delhi office jayega"}` | Named Entity Recognition only |
+| `/api/sentiment` | `POST` | `{"text": "Yaar movie bahut acchi thi"}` | Sentiment polarity, score, and keywords |
+| `/api/translate` | `POST` | `{"text": "Khana khao aur so jao"}` | Hinglish to English translation |
+| `/api/datasets` | `GET` | `?name=ner` \| `sentiment` \| `translation` \| `sample` | Fetches JSON records from curated CSV datasets |
+
+---
+
+## 🧪 Benchmark Examples
+
+Try these sample inputs in the Web Studio or Streamlit dashboard:
+
+| Feature | Sample Hinglish Input | Output Highlights |
 | :--- | :--- | :--- |
-| **POS Tagging** | `Mujhe kal college jaana hai bro` | `Tokens: [Mujhe (PRON), kal (ADV), college (NOUN), jaana (VERB), hai (AUX), bro (NOUN)]` |
-| **NER** | `Rahul kal Delhi office jayega` | `Rahul (PERSON), kal (DATE_TIME - Tomorrow), Delhi (LOCATION), office (FACILITY)` |
-| **Sentiment** | `Yaar aaj ka lecture bahut boring tha` | `🔴 Negative (Polarity: -1.0, Signal: boring [-1.28], Intensifier: bahut)` |
-| **Translation** | `Mujhe kal college jaana hai bro` | `I have to go to college tomorrow, bro.` |
-| **Translation** | `Rahul kal Delhi office jayega` | `Rahul will go to the Delhi office tomorrow.` |
+| **POS Tagging** | `Mujhe kal college jaana hai bro` | `[Mujhe (PRON), kal (ADV), college (NOUN), jaana (VERB), hai (AUX), bro (NOUN)]` |
+| **Temporal NER** | `Rahul kal Delhi office jayega` | `Rahul (PERSON), kal (DATE_TIME - Future/Tomorrow), Delhi (LOCATION), office (FACILITY)` |
+| **Temporal NER** | `Rahul kal Delhi office gaya tha` | `Rahul (PERSON), kal (DATE_TIME - Past/Yesterday), Delhi (LOCATION), office (FACILITY)` |
+| **Negated Sentiment** | `Khana bilkul accha nahi tha` | `🔴 Negative (Polarity: -0.75, Negation Inversion triggered by 'nahi')` |
+| **Intensified Sentiment**| `Yaar aaj ka lecture bahut boring tha` | `🔴 Negative (Polarity: -1.0, Signal: boring, Intensifier: bahut)` |
+| **Translation** | `Mujhe kal college jaana hai bro` | `I have to go to college tomorrow, bro.` *(Direct Dataset Match)* |
+| **Translation** | `Mera laptop slow hai but theek ho jayega` | `My laptop is slow but it will be fine.` *(Phrase & Lexical Composition)* |
+
+---
+
+## ❓ Troubleshooting
+
+- **`ModuleNotFoundError: No module named 'flask'` (or `streamlit` / `pandas`):**
+  Ensure your virtual environment is activated before running `python run.py`. You should see `(venv)` in your terminal prompt.
+- **Port 8000 already in use:**
+  Run on a different port:
+  ```bash
+  python run.py 8080
+  ```
+- **Streamlit command not recognized:**
+  Run `pip install -r requirements.txt` within your active virtual environment.
 
 ---
 
 ## 👩‍💻 NLP Course Project
-**Hinglish Text Analyzer & NLP Suite — Sem 5 NLP Project**
+**Hinglish Text Analyzer & NLP Suite — Semester 5 NLP Project**  
+Created for Hindi-English code-mixed and Romanized text processing.
