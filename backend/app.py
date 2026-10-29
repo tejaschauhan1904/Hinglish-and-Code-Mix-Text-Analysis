@@ -2,6 +2,7 @@ import os
 import streamlit as st
 import pandas as pd
 try:
+    from . import db
     from .analyzer import (
         analyze_text,
         analyze_ner,
@@ -9,15 +10,13 @@ try:
         translate_hinglish_to_english
     )
 except (ImportError, ValueError):
+    import db
     from analyzer import (
         analyze_text,
         analyze_ner,
         analyze_sentiment,
         translate_hinglish_to_english
     )
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA_DIR = os.path.join(BASE_DIR, "data") if os.path.exists(os.path.join(BASE_DIR, "data")) else os.path.abspath("data")
 
 st.set_page_config(
     page_title="Hinglish Text Analyzer & NLP Suite",
@@ -79,25 +78,29 @@ with st.sidebar:
     st.markdown("---")
     st.header("💡 Try an Example")
 
-    # Diverse examples tailored to features
-    preset_examples = {
-        "Hinglish Code-Mix": "Mujhe kal college jaana hai bro",
-        "NER (Person + City + Office)": "Rahul kal Delhi office jayega",
-        "Negative Sentiment": "Yaar aaj ka lecture bahut boring tha",
-        "Positive Sentiment": "Ye movie sach me bahut acchi thi",
-        "Negated Sentiment": "Khana bilkul accha nahi tha aur staff rude tha",
-        "Multi-Entity & Translation": "Kal subah 9 baje meeting hai TCS ke office me",
-        "Casual Chat Translation": "Mera laptop slow hai but theek ho jayega"
-    }
+    # Dynamic examples loaded directly from Supabase DB
+    preset_examples = db.get_preset_examples()
+    if not preset_examples:
+        preset_examples = {
+            "Hinglish Code-Mix": "Mujhe kal college jaana hai bro",
+            "NER (Person + City + Office)": "Rahul kal Delhi office jayega"
+        }
 
     for label, ex_text in preset_examples.items():
         if st.button(f"{label}: \"{ex_text[:28]}...\"", use_container_width=True):
             st.session_state["text"] = ex_text
 
+    st.markdown("---")
+    st.header("🗄️ Database (Supabase)")
+    st.caption("Active Source: Supabase PostgreSQL")
+    if st.button("🔄 Sync with Supabase", use_container_width=True):
+        db.refresh_cache()
+        st.success("Synchronized with Supabase DB!")
+
 # If Dataset Explorer is selected, handle separately
 if feature_mode == "📚 Dataset Explorer":
     st.subheader("📁 Curated Datasets for Hinglish NLP")
-    st.markdown("Explore the custom large datasets created specifically for Hinglish text analysis, NER, Sentiment, and Translation.")
+    st.markdown("Explore datasets queried directly from **Supabase PostgreSQL** (`datasets_ner`, `datasets_sentiment`, `datasets_translation`, `datasets_sample`).")
 
     dataset_option = st.selectbox(
         "Choose Dataset to Inspect:",
@@ -109,19 +112,20 @@ if feature_mode == "📚 Dataset Explorer":
         ]
     )
 
-    path_map = {
-        "🏷️ Named Entity Recognition (NER) Dataset": os.path.join(DATA_DIR, "hinglish_ner_dataset.csv"),
-        "🎭 Sentiment Analysis Dataset": os.path.join(DATA_DIR, "hinglish_sentiment_dataset.csv"),
-        "🔄 Hinglish-to-English Translation Dataset": os.path.join(DATA_DIR, "hinglish_translation_dataset.csv"),
-        "📝 General Sample Hinglish Corpus": os.path.join(DATA_DIR, "sample_hinglish.csv")
+    name_map = {
+        "🏷️ Named Entity Recognition (NER) Dataset": "ner",
+        "🎭 Sentiment Analysis Dataset": "sentiment",
+        "🔄 Hinglish-to-English Translation Dataset": "translation",
+        "📝 General Sample Hinglish Corpus": "sample"
     }
 
-    selected_file = path_map[dataset_option]
-    if os.path.exists(selected_file):
-        df_dataset = pd.read_csv(selected_file)
+    selected_key = name_map[dataset_option]
+    try:
+        data_info = db.get_dataset(selected_key)
+        df_dataset = pd.DataFrame(data_info["data"])
         c1, c2 = st.columns([1, 3])
-        c1.metric("Total Records", len(df_dataset))
-        c2.write(f"**File Location:** `{selected_file}`")
+        c1.metric("Total Records", data_info["total_records"])
+        c2.write(f"**Source Table:** Supabase `public.{data_info['table_name']}`")
 
         # Search filter
         search_kw = st.text_input("Filter dataset by keyword:", "")
@@ -131,8 +135,8 @@ if feature_mode == "📚 Dataset Explorer":
             st.dataframe(filtered_df, use_container_width=True)
         else:
             st.dataframe(df_dataset, use_container_width=True)
-    else:
-        st.error(f"Dataset file `{selected_file}` not found.")
+    except Exception as e:
+        st.error(f"Failed to fetch dataset from Supabase: {e}")
 
     st.stop()
 

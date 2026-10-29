@@ -6,6 +6,8 @@ Usage:
   python run.py 3000         # Start Modern Web Studio on custom port
   python run.py --streamlit  # Start Streamlit Dashboard
   python run.py --test       # Run test suite
+  python run.py --migrate    # Migrate/seed all data into Supabase PostgreSQL
+  python run.py --db-status  # Check Supabase database connectivity & table metrics
 """
 
 import sys
@@ -30,6 +32,21 @@ def main():
         print("Running test suite...")
         test_path = os.path.join(backend_dir, "test_analyzer.py")
         subprocess.run([sys.executable, test_path])
+    elif "--migrate" in args:
+        print("Running Supabase migration & data seeding...")
+        migrate_path = os.path.join(base_dir, "migrate_to_supabase.py")
+        subprocess.run([sys.executable, migrate_path])
+    elif "--db-status" in args:
+        import backend.db as db
+        status = db.get_db_status()
+        print("\nSupabase Database Status:")
+        print(f"  Connected: {status['status']}")
+        print(f"  Database: {status['database']}")
+        print(f"  Total records across tables: {status['total_records']}")
+        print("  Table breakdown:")
+        for tbl, count in status["tables"].items():
+            print(f"    - {tbl}: {count} records")
+        print()
     else:
         # Default: Launch modern Flask web studio
         from backend.server import main as run_server

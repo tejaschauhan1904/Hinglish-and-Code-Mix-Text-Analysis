@@ -1,11 +1,11 @@
 import os
 import sys
 import json
-import pandas as pd
 from flask import Flask, request, jsonify, send_from_directory
 
 # Support running directly or as a module
 try:
+    from . import db
     from .analyzer import (
         analyze_text,
         analyze_ner,
@@ -13,6 +13,7 @@ try:
         translate_hinglish_to_english
     )
 except (ImportError, ValueError):
+    import db
     from analyzer import (
         analyze_text,
         analyze_ner,
@@ -24,10 +25,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
 if not os.path.exists(FRONTEND_DIR):
     FRONTEND_DIR = os.path.abspath("frontend")
-
-DATA_DIR = os.path.join(BASE_DIR, "data")
-if not os.path.exists(DATA_DIR):
-    DATA_DIR = os.path.abspath("data")
 
 app = Flask(__name__, static_folder=FRONTEND_DIR, static_url_path="")
 
@@ -71,44 +68,42 @@ def api_translate():
 
 @app.route("/api/datasets", methods=["GET"])
 def api_datasets():
-    datasets = {
-        "ner": {
-            "title": "Named Entity Recognition (NER) Dataset",
-            "file": os.path.join(DATA_DIR, "hinglish_ner_dataset.csv")
-        },
-        "sentiment": {
-            "title": "Sentiment Analysis Dataset",
-            "file": os.path.join(DATA_DIR, "hinglish_sentiment_dataset.csv")
-        },
-        "translation": {
-            "title": "Hinglish to English Translation Dataset",
-            "file": os.path.join(DATA_DIR, "hinglish_translation_dataset.csv")
-        },
-        "sample": {
-            "title": "Sample Hinglish Corpus",
-            "file": os.path.join(DATA_DIR, "sample_hinglish.csv")
-        }
-    }
-
+    """Fetches datasets directly from Supabase PostgreSQL tables."""
     selected = request.args.get("name", "ner")
-    if selected not in datasets:
-        return jsonify({"error": "Invalid dataset name"}), 404
+    try:
+        dataset_info = db.get_dataset(selected)
+        return jsonify(dataset_info)
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 404
+    except Exception as e:
+        return jsonify({"error": f"Database query failed: {str(e)}"}), 500
 
-    target = datasets[selected]
-    if not os.path.exists(target["file"]):
-        return jsonify({"error": f"File {target['file']} not found"}), 404
+@app.route("/api/presets", methods=["GET"])
+def api_presets():
+    """Fetches preset examples directly from Supabase PostgreSQL."""
+    try:
+        presets = db.get_preset_examples()
+        return jsonify(presets)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    df = pd.read_csv(target["file"])
-    records = df.to_dict(orient="records")
-    columns = list(df.columns)
+@app.route("/api/db/status", methods=["GET"])
+def api_db_status():
+    """Returns live database status and table metrics from Supabase."""
+    try:
+        status = db.get_db_status()
+        return jsonify(status)
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)}), 500
 
-    return jsonify({
-        "dataset_name": selected,
-        "title": target["title"],
-        "columns": columns,
-        "total_records": len(records),
-        "data": records
-    })
+@app.route("/api/db/refresh", methods=["POST"])
+def api_db_refresh():
+    """Reloads in-memory cache directly from Supabase."""
+    try:
+        status = db.refresh_cache()
+        return jsonify({"message": "Cache refreshed successfully from Supabase", "status": status})
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)}), 500
 
 def main():
     port = int(os.environ.get("PORT", 8000))

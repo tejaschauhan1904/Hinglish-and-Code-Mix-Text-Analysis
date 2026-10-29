@@ -4,6 +4,10 @@
 # Core Web Framework & REST API Backend
 Flask>=3.0.0
 
+# Database & Environment (Supabase PostgreSQL)
+psycopg2-binary>=2.9.0
+python-dotenv>=1.0.0
+
 # Dataset Manipulation & Corpus Processing
 pandas>=2.0.0
 

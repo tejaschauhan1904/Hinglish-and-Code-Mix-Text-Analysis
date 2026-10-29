@@ -58,8 +58,10 @@ Output Delivery (Flask REST API / Modern Web UI / Streamlit Dashboard)
 ```text
 Hinglish-and-Code-Mix-Text-Analysis/
 │
-├── run.py                             # Root application launcher (Flask / Streamlit / Tests)
-├── requirements.txt                   # Project dependencies (Flask, pandas, streamlit)
+├── .env                               # Supabase credentials (SUPABASE_URL, DATABASE_URL)
+├── run.py                             # Root application launcher (Flask / Streamlit / Tests / DB)
+├── migrate_to_supabase.py             # Database creation & seeding script (13 tables, 1,313 records)
+├── requirements.txt                   # Project dependencies (Flask, psycopg2, python-dotenv, streamlit)
 ├── README.md                          # Comprehensive documentation & setup guide
 │
 ├── frontend/                          # Modern Web UI (HTML5, Vanilla CSS3, JavaScript)
@@ -67,22 +69,44 @@ Hinglish-and-Code-Mix-Text-Analysis/
 │   ├── style.css                      # Design system, tokens & animations
 │   └── app.js                         # Dynamic client-side logic & API integration
 │
-├── backend/                           # Python NLP & API Architecture
+├── backend/                           # Python NLP & API Architecture (100% DB-Powered)
 │   ├── __init__.py                    # Package initialization & exports
-│   ├── server.py                      # Flask REST API server (serves frontend)
-│   ├── analyzer.py                    # Core pipeline orchestrator
-│   ├── ner_engine.py                  # Named Entity Recognition engine
-│   ├── sentiment_engine.py            # Keyword & rule-based sentiment engine
-│   ├── translation_engine.py          # Hinglish-to-English translation engine
+│   ├── db.py                          # Supabase PostgreSQL client, queries & cache manager
+│   ├── server.py                      # Flask REST API server (serves frontend & DB endpoints)
+│   ├── analyzer.py                    # Core pipeline orchestrator (loads data from DB)
+│   ├── ner_engine.py                  # Named Entity Recognition engine (gazetteers from DB)
+│   ├── sentiment_engine.py            # Keyword & rule-based sentiment engine (lexicons from DB)
+│   ├── translation_engine.py          # Hinglish-to-English translation engine (rules from DB)
 │   ├── app.py                         # Streamlit dashboard alternative
 │   └── test_analyzer.py               # Comprehensive CLI test suite
 │
-└── data/                              # Curated NLP Datasets
+└── data/                              # Curated NLP Datasets (Seed Sources)
     ├── hinglish_ner_dataset.csv        # 50 sentences with labeled NER entities
     ├── hinglish_sentiment_dataset.csv  # 50 sentences with sentiment polarities & keywords
     ├── hinglish_translation_dataset.csv# 55+ parallel Hinglish-to-English pairs
     └── sample_hinglish.csv             # 20 diverse sample Hinglish sentences
 ```
+
+---
+
+## 🗄️ Database Architecture (Supabase PostgreSQL)
+
+All datasets, lexicons, gazetteers, rules, and example queries have been **100% shifted from the code to Supabase PostgreSQL**. There is zero hardcoded data left in the Python codebase.
+
+### Created Database Tables (13 Tables, 1,313 Records):
+1. **`datasets_ner`** (50 records): Annotated sentences, JSON entity labels, and summaries.
+2. **`datasets_sentiment`** (50 records): Sentiment classification sentences with polarity scores and cue keywords.
+3. **`datasets_translation`** (55 records): Parallel Hinglish-English dataset for semantic lookup and training.
+4. **`datasets_sample`** (20 records): Sample code-mixed text categorized by domain.
+5. **`nlp_vocabulary`** (282 records): Hindi and English lexicons for Language Identification (LID).
+6. **`nlp_pos_lexicon`** (227 records): Part-of-speech mappings (PRON, NOUN, VERB, ADJ, ADV, AUX, etc.).
+7. **`nlp_sentiment_lexicon`** (135 records): Positive and negative sentiment words with base weights + emojis.
+8. **`nlp_sentiment_modifiers`** (34 records): Negators, intensifiers, and diminishers with dynamic multipliers.
+9. **`nlp_entities_gazetteer`** (133 records): PERSON, LOCATION, ORGANIZATION, FACILITY, and EVENT gazetteers.
+10. **`nlp_temporal_indicators`** (81 records): Temporal cues, past indicators, and future indicators.
+11. **`nlp_phrase_translations`** (55 records): Conversational Hinglish phrases and idioms mapped to English.
+12. **`nlp_word_translations`** (184 records): Lexical Hindi-to-English translation mappings.
+13. **`nlp_preset_examples`** (7 records): Preset test cases and demonstration queries for the UI.
 
 ---
 
