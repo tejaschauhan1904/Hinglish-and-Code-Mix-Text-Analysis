@@ -1,91 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hinglish AI Studio | Code-Mixed NLP Suite</title>
-    <meta name="description" content="State-of-the-art NLP analyzer for Hindi-English code-mixed (Hinglish) text. Tokenization, POS Tagging, NER, Sentiment Analysis, and Translation.">
-    <!-- Google Fonts -->
+    <title>Hinglish NLP Studio | Code-Mixed Text Analyzer</title>
+    <meta name="description" content="Clean, modern NLP studio for Hindi-English code-mixed (Hinglish) text. Tokenization, POS Tagging, NER, Sentiment Analysis, and Translation.">
+    <!-- Google Fonts: Inter & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="dark-theme">
     <div class="app-layout">
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar">
+        <!-- Left Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
             <div class="brand">
-                <div class="brand-icon">
-                    <span class="flag-gradient"></span>
-                    <span class="icon-symbol">अ/A</span>
+                <div class="brand-badge">
+                    <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+                    </svg>
                 </div>
                 <div class="brand-text">
-                    <h2>Hinglish AI</h2>
-                    <span class="badge-tag">NLP STUDIO</span>
+                    <h2>Hinglish Studio</h2>
+                    <span class="brand-sub">NLP Intelligence</span>
                 </div>
             </div>
 
-            <div class="nav-section-title">FEATURES</div>
+            <div class="nav-section-title">Studio Views</div>
             <nav class="feature-nav">
                 <button class="nav-item active" data-feature="all">
-                    <span class="nav-icon">✨</span>
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+                    </svg>
                     <span class="nav-label">All-in-One Studio</span>
                 </button>
                 <button class="nav-item" data-feature="pos">
-                    <span class="nav-icon">🏷️</span>
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+                    </svg>
                     <span class="nav-label">POS & Language ID</span>
                 </button>
                 <button class="nav-item" data-feature="ner">
-                    <span class="nav-icon">🔍</span>
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                    </svg>
                     <span class="nav-label">Named Entities (NER)</span>
                 </button>
                 <button class="nav-item" data-feature="sentiment">
-                    <span class="nav-icon">🎭</span>
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.313 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                    </svg>
                     <span class="nav-label">Sentiment Analysis</span>
                 </button>
                 <button class="nav-item" data-feature="translation">
-                    <span class="nav-icon">🔄</span>
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802" />
+                    </svg>
                     <span class="nav-label">English Translation</span>
                 </button>
                 <button class="nav-item" data-feature="datasets">
-                    <span class="nav-icon">📁</span>
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 5.625c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+                    </svg>
                     <span class="nav-label">Dataset Explorer</span>
                 </button>
             </nav>
-
-            <div class="nav-section-title">QUICK PRESETS</div>
-            <div class="preset-list">
-                <button class="preset-btn" data-text="Rahul kal Delhi office jayega">
-                    <span class="preset-tag ner">NER</span>
-                    <span class="preset-text">Rahul kal Delhi office jayega</span>
-                </button>
-                <button class="preset-btn" data-text="Yaar aaj ka lecture bahut boring tha">
-                    <span class="preset-tag neg">Sentiment -</span>
-                    <span class="preset-text">Yaar aaj ka lecture bahut boring tha</span>
-                </button>
-                <button class="preset-btn" data-text="Ye movie sach me bahut acchi thi">
-                    <span class="preset-tag pos">Sentiment +</span>
-                    <span class="preset-text">Ye movie sach me bahut acchi thi</span>
-                </button>
-                <button class="preset-btn" data-text="Mujhe kal college jaana hai bro">
-                    <span class="preset-tag trans">Mix</span>
-                    <span class="preset-text">Mujhe kal college jaana hai bro</span>
-                </button>
-                <button class="preset-btn" data-text="Kal subah 9 baje meeting hai TCS ke office me">
-                    <span class="preset-tag ner">Entity+Trans</span>
-                    <span class="preset-text">Kal subah 9 baje meeting hai TCS ke...</span>
-                </button>
-                <button class="preset-btn" data-text="Khana bilkul accha nahi tha aur staff rude tha">
-                    <span class="preset-tag neg">Negation</span>
-                    <span class="preset-text">Khana bilkul accha nahi tha...</span>
-                </button>
-            </div>
-
-            <div class="sidebar-footer">
-                <div class="tech-pill">Supabase DB • PostgreSQL</div>
-                <div class="tech-sub">Cloud-synced • 1,313 Records</div>
-            </div>
         </aside>
 
         <!-- Main Content Area -->
@@ -98,302 +79,321 @@
                     <span class="crumb-current" id="currentFeatureTitle">All-in-One Studio</span>
                 </div>
                 <div class="top-actions">
-                    <button id="themeToggleBtn" class="action-icon-btn" title="Toggle Theme">
-                        <span id="themeIcon">☀️</span>
+                    <!-- Light / Dark Mode Toggle Button -->
+                    <button id="themeToggleBtn" class="theme-toggle-btn" title="Toggle Light / Dark Mode" aria-label="Toggle theme">
+                        <!-- Sun Icon (shown in dark theme) -->
+                        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                        </svg>
+                        <!-- Moon Icon (shown in light theme) -->
+                        <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                        </svg>
                     </button>
-                    <a href="http://localhost:8501" target="_blank" class="secondary-btn" title="Open Streamlit view">
-                        Streamlit Version
+                    <a href="http://localhost:8501" target="_blank" class="secondary-link-btn" title="Open Streamlit view">
+                        <span>Streamlit View</span>
                     </a>
                 </div>
             </header>
 
-            <!-- Quick Pill Filter Bar -->
-            <section class="prompt-pills-bar">
-                <span class="pills-label">Try instantly:</span>
-                <div class="pills-scroll" id="pillsContainer">
-                    <button class="pill" data-text="Rahul kal Delhi office jayega">👤 Rahul kal Delhi office jayega</button>
-                    <button class="pill" data-text="Yaar aaj ka lecture bahut boring tha">🥱 Aaj ka lecture bahut boring tha</button>
-                    <button class="pill" data-text="Ye movie sach me bahut acchi thi">🍿 Ye movie sach me bahut acchi thi</button>
-                    <button class="pill" data-text="Mujhe kal college jaana hai bro">🎓 Mujhe kal college jaana hai bro</button>
-                    <button class="pill" data-text="Mera laptop slow hai but theek ho jayega">💻 Mera laptop slow hai but theek ho jayega</button>
-                </div>
-            </section>
-
-            <!-- Console Input Box -->
-            <section class="console-card">
-                <div class="console-header">
-                    <div class="console-label">
-                        <span class="indicator-dot"></span>
-                        <span>INPUT HINGLISH TEXT</span>
-                    </div>
-                    <div class="console-stats">
-                        <span id="charCount">0 characters</span>
-                        <span class="stat-sep">•</span>
-                        <span id="wordCount">0 words</span>
-                    </div>
-                </div>
-
-                <div class="textarea-wrapper">
-                    <textarea 
-                        id="inputText" 
-                        rows="3" 
-                        placeholder="Type or paste Roman-Hindi / Hinglish text here (e.g. 'Rahul kal Delhi office jayega' or 'Yaar ye movie bahut acchi thi')..."
-                    >Rahul kal Delhi office jayega</textarea>
-                </div>
-
-                <div class="console-footer">
-                    <div class="footer-left">
-                        <button id="clearBtn" class="ghost-btn">Clear</button>
-                        <span class="keyboard-tip">Tip: Press <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to analyze</span>
-                    </div>
-                    <button id="analyzeBtn" class="primary-btn">
-                        <span class="btn-icon">⚡</span>
-                        <span class="btn-text">Analyze Text</span>
-                    </button>
-                </div>
-            </section>
-
-            <!-- Dynamic Output Container -->
-            <div id="resultsContainer" class="results-area">
-                <!-- Overview Stats Row -->
-                <div class="stats-grid" id="statsGrid">
-                    <div class="stat-card">
-                        <div class="stat-icon-wrapper lang">🌐</div>
-                        <div class="stat-details">
-                            <span class="stat-title">Classification</span>
-                            <span class="stat-value" id="statSentenceType">Hinglish / Code-Mixed</span>
-                            <div class="stat-sub" id="statLangRatio">Hindi: 50% | English: 50%</div>
+            <div class="content-body">
+                <!-- Input Console Card -->
+                <section class="console-card">
+                    <div class="console-header">
+                        <div class="console-label">
+                            <span class="indicator-dot"></span>
+                            <span>Input Hinglish Text</span>
+                        </div>
+                        <div class="console-stats">
+                            <span id="charCount">0 characters</span>
+                            <span class="stat-sep">·</span>
+                            <span id="wordCount">0 words</span>
                         </div>
                     </div>
 
-                    <div class="stat-card">
-                        <div class="stat-icon-wrapper sentiment" id="sentimentIconWrapper">🎭</div>
-                        <div class="stat-details">
-                            <span class="stat-title">Sentiment Tone</span>
-                            <span class="stat-value" id="statSentiment">Neutral</span>
-                            <div class="stat-sub" id="statPolarity">Polarity: 0.00</div>
-                        </div>
+                    <div class="textarea-wrapper">
+                        <textarea 
+                            id="inputText" 
+                            rows="3" 
+                            placeholder="Type or paste Roman-Hindi / Hinglish text here (e.g. 'Rahul kal Delhi office jayega' or 'how are you bhai')..."
+                        >Rahul kal Delhi office jayega</textarea>
                     </div>
 
-                    <div class="stat-card">
-                        <div class="stat-icon-wrapper ner">🔍</div>
-                        <div class="stat-details">
-                            <span class="stat-title">Named Entities</span>
-                            <span class="stat-value" id="statEntityCount">4 detected</span>
-                            <div class="stat-sub" id="statEntityTypes">PERSON, LOCATION, TIME...</div>
+                    <div class="console-footer">
+                        <div class="footer-left">
+                            <button id="clearBtn" class="ghost-btn">Clear</button>
+                            <span class="keyboard-tip">Press <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to analyze</span>
                         </div>
+                        <button id="analyzeBtn" class="primary-btn">
+                            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                            </svg>
+                            <span class="btn-text">Analyze Text</span>
+                        </button>
                     </div>
+                </section>
 
-                    <div class="stat-card">
-                        <div class="stat-icon-wrapper trans">🔄</div>
-                        <div class="stat-details">
-                            <span class="stat-title">Translation Method</span>
-                            <span class="stat-value" id="statTransMethod">Dataset Match</span>
-                            <div class="stat-sub" id="statTransConf">Confidence: 100%</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Main View Sections Container -->
-                <div class="view-content" id="viewContent">
-                    <!-- Sections will be selectively shown/hidden based on active feature -->
-
-                    <!-- 1. Translation Card -->
-                    <section class="feature-card translation-card" id="sectionTranslation">
-                        <div class="card-header">
-                            <div class="header-left">
-                                <span class="card-badge trans-badge">TRANSLATION</span>
-                                <h3>Hinglish to English Translation</h3>
+                <!-- Dynamic Output Container -->
+                <div id="resultsContainer" class="results-area">
+                    <!-- Overview Stats Row (Responsive 4-column balanced grid) -->
+                    <div class="stats-grid" id="statsGrid">
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper">
+                                <svg class="stat-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-.778.099-1.533.284-2.253" />
+                                </svg>
                             </div>
-                            <button id="copyTranslationBtn" class="copy-btn" title="Copy Translation">
-                                <span>📋 Copy</span>
-                            </button>
-                        </div>
-                        <div class="trans-dual-view">
-                            <div class="trans-box source-box">
-                                <span class="trans-label">Hinglish Input</span>
-                                <p class="trans-text" id="sourceDisplay">Rahul kal Delhi office jayega</p>
-                            </div>
-                            <div class="trans-arrow">➔</div>
-                            <div class="trans-box target-box">
-                                <span class="trans-label">Standard English</span>
-                                <p class="trans-text" id="targetDisplay">Rahul will go to the Delhi office tomorrow.</p>
-                            </div>
-                        </div>
-                        <div class="trans-meta" id="transMeta">
-                            <span class="method-tag" id="transMethodBadge">Dataset Direct Match</span>
-                            <span class="meta-desc" id="transDesc">Exact high-confidence match from curated Hinglish-English parallel corpus.</span>
-                        </div>
-                    </section>
-
-                    <!-- 2. Named Entity Recognition (NER) Card -->
-                    <section class="feature-card" id="sectionNER">
-                        <div class="card-header">
-                            <div class="header-left">
-                                <span class="card-badge ner-badge">ENTITIES</span>
-                                <h3>Named Entity Recognition (NER)</h3>
-                            </div>
-                            <span class="badge-counter" id="nerCounterBadge">4 Entities Found</span>
-                        </div>
-                        
-                        <div class="ner-interactive-view">
-                            <div class="sub-label">Highlighted Entity Chips:</div>
-                            <div class="entity-chips-container" id="entityChipsContainer">
-                                <!-- Chips dynamically injected -->
+                            <div class="stat-details">
+                                <span class="stat-title">Classification</span>
+                                <span class="stat-value" id="statSentenceType" title="Hinglish / Code-Mixed">Hinglish / Code-Mixed</span>
+                                <div class="stat-sub" id="statLangRatio">Hindi: 50% · English: 50%</div>
                             </div>
                         </div>
 
-                        <div class="table-card">
-                            <table class="data-table" id="nerTable">
-                                <thead>
-                                    <tr>
-                                        <th>Entity</th>
-                                        <th>Category</th>
-                                        <th>Contextual Meaning / Resolution</th>
-                                        <th>Span</th>
-                                    </tr>
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper">
+                                <svg class="stat-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.313 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                                </svg>
+                            </div>
+                            <div class="stat-details">
+                                <span class="stat-title">Sentiment Tone</span>
+                                <span class="stat-value" id="statSentiment">Neutral</span>
+                                <div class="stat-sub" id="statPolarity">Polarity: 0.00</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper">
+                                <svg class="stat-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                </svg>
+                            </div>
+                            <div class="stat-details">
+                                <span class="stat-title">Named Entities</span>
+                                <span class="stat-value" id="statEntityCount">4 detected</span>
+                                <div class="stat-sub" id="statEntityTypes">PERSON, LOCATION...</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon-wrapper">
+                                <svg class="stat-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                                </svg>
+                            </div>
+                            <div class="stat-details">
+                                <span class="stat-title">Translation Method</span>
+                                <span class="stat-value" id="statTransMethod" title="Database Match">Database Match</span>
+                                <div class="stat-sub" id="statTransConf">Confidence: 100%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main View Sections Container -->
+                    <div class="view-content" id="viewContent">
+                        <!-- 1. Translation Card (No copy button) -->
+                        <section class="feature-card translation-card" id="sectionTranslation">
+                            <div class="card-header">
+                                <div class="header-left">
+                                    <span class="card-badge trans-badge">Translation</span>
+                                    <h3>Hinglish to English Translation</h3>
+                                </div>
+                            </div>
+                            <div class="trans-dual-view">
+                                <div class="trans-box source-box">
+                                    <span class="trans-label">Hinglish Input</span>
+                                    <p class="trans-text" id="sourceDisplay">Rahul kal Delhi office jayega</p>
+                                </div>
+                                <div class="trans-arrow">
+                                    <svg class="arrow-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                                    </svg>
+                                </div>
+                                <div class="trans-box target-box">
+                                    <span class="trans-label">Standard English</span>
+                                    <p class="trans-text" id="targetDisplay">Rahul will go to the Delhi office tomorrow.</p>
+                                </div>
+                            </div>
+                            <div class="trans-meta" id="transMeta">
+                                <span class="method-tag" id="transMethodBadge">Database Direct Match</span>
+                                <span class="meta-desc" id="transDesc">Exact match retrieved from Supabase Hinglish-English parallel dataset.</span>
+                            </div>
+                        </section>
+
+                        <!-- 2. Named Entity Recognition (NER) Card -->
+                        <section class="feature-card" id="sectionNER">
+                            <div class="card-header">
+                                <div class="header-left">
+                                    <span class="card-badge ner-badge">Entities</span>
+                                    <h3>Named Entity Recognition (NER)</h3>
+                                </div>
+                                <span class="badge-counter" id="nerCounterBadge">4 Entities Found</span>
+                            </div>
+                            
+                            <div class="ner-interactive-view">
+                                <div class="sub-label">Extracted Entity Tags:</div>
+                                <div class="entity-chips-container" id="entityChipsContainer">
+                                    <!-- Chips dynamically injected -->
+                                </div>
+                            </div>
+
+                            <div class="table-card">
+                                <table class="data-table" id="nerTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Entity</th>
+                                            <th>Category</th>
+                                            <th>Contextual Meaning / Resolution</th>
+                                            <th>Span</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="nerTableBody">
+                                        <!-- Rows injected dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="context-banner" id="kalContextBanner" style="display:none;">
+                                <svg class="banner-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <div class="banner-text">
+                                    <strong>Temporal Context for "kal":</strong>
+                                    <span id="kalContextExplanation">Inferred as Tomorrow (Future) based on future auxiliary cues.</span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- 3. Sentiment Analysis Card -->
+                        <section class="feature-card" id="sectionSentiment">
+                            <div class="card-header">
+                                <div class="header-left">
+                                    <span class="card-badge sent-badge">Sentiment</span>
+                                    <h3>Sentiment Analysis & Polarity</h3>
+                                </div>
+                                <div class="sentiment-pill" id="sentimentPill">Neutral</div>
+                            </div>
+
+                            <div class="sentiment-grid">
+                                <div class="polarity-meter-card">
+                                    <span class="meter-title">Polarity Score Spectrum</span>
+                                    <div class="spectrum-bar">
+                                        <div class="spectrum-fill" id="spectrumFill"></div>
+                                        <div class="spectrum-indicator" id="spectrumIndicator"></div>
+                                    </div>
+                                    <div class="spectrum-labels">
+                                        <span>-1.0 (Negative)</span>
+                                        <span>0.0 (Neutral)</span>
+                                        <span>+1.0 (Positive)</span>
+                                    </div>
+                                    <div class="polarity-number" id="polarityNumber">0.00</div>
+                                </div>
+
+                                <div class="sentiment-breakdown">
+                                    <div class="signal-group">
+                                        <span class="signal-label positive">Positive Signals:</span>
+                                        <div class="signal-tags" id="positiveSignals">
+                                            <span class="no-signals">None</span>
+                                        </div>
+                                    </div>
+                                    <div class="signal-group">
+                                        <span class="signal-label negative">Negative Signals:</span>
+                                        <div class="signal-tags" id="negativeSignals">
+                                            <span class="no-signals">None</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="sentiment-alerts" id="sentimentAlerts">
+                                <!-- Negation or intensifier banners -->
+                            </div>
+
+                            <div class="linguistic-explanation">
+                                <strong>Linguistic Reasoning:</strong>
+                                <span id="sentimentReasoning">No sentiment-bearing keywords detected; purely factual message.</span>
+                            </div>
+                        </section>
+
+                        <!-- 4. POS & Language ID Card (Only shown when 'pos' feature selected from sidebar) -->
+                        <section class="feature-card" id="sectionPOS" style="display:none;">
+                            <div class="card-header">
+                                <div class="header-left">
+                                    <span class="card-badge pos-badge">Syntax</span>
+                                    <h3>Tokenization, Language ID & Rule-Based POS Tagging</h3>
+                                </div>
+                                <div class="lang-pill-container" id="langPillSummary">
+                                    <span class="lang-pill hindi">Hindi: 4</span>
+                                    <span class="lang-pill english">English: 1</span>
+                                    <span class="lang-pill other">Other: 5</span>
+                                </div>
+                            </div>
+
+                            <div class="sub-label">Segmented Token Breakdown:</div>
+                            <div class="token-chips-display" id="tokenChipsDisplay">
+                                <!-- Visual tokens with POS badges -->
+                            </div>
+
+                            <div class="table-card">
+                                <table class="data-table" id="posTable">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Token</th>
+                                            <th>Identified Language</th>
+                                            <th>Assigned POS Tag</th>
+                                            <th>Tag Category</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="posTableBody">
+                                        <!-- Injected -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="linguistic-explanation">
+                                <strong>Summary:</strong>
+                                <span id="posSummaryText">Loading summary...</span>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Dataset Explorer View (Shown when 'datasets' feature selected) -->
+                    <div class="dataset-view" id="datasetView" style="display:none;">
+                        <div class="dataset-header-card">
+                            <div class="dataset-selector-row">
+                                <div class="selector-group">
+                                    <label for="datasetSelect">Select Dataset:</label>
+                                    <select id="datasetSelect" class="modern-select">
+                                        <option value="ner">Named Entity Recognition (NER) Dataset</option>
+                                        <option value="sentiment">Sentiment Analysis Dataset</option>
+                                        <option value="translation">Translation Dataset</option>
+                                        <option value="sample">Sample Hinglish Corpus</option>
+                                    </select>
+                                </div>
+                                <div class="search-group">
+                                    <input type="text" id="datasetSearchInput" class="modern-search" placeholder="Search keywords in dataset...">
+                                </div>
+                            </div>
+
+                            <div class="dataset-meta-row">
+                                <span id="datasetRecordCount" class="record-count">Total: 50 records</span>
+                                <span class="dataset-note">Queried directly from Supabase PostgreSQL tables.</span>
+                            </div>
+                        </div>
+
+                        <div class="table-card dataset-table-card">
+                            <table class="data-table" id="datasetDataTable">
+                                <thead id="datasetTableHead">
+                                    <!-- Headers injected -->
                                 </thead>
-                                <tbody id="nerTableBody">
-                                    <!-- Rows injected dynamically -->
+                                <tbody id="datasetTableBody">
+                                    <!-- Rows injected -->
                                 </tbody>
                             </table>
                         </div>
-
-                        <div class="context-banner" id="kalContextBanner" style="display:none;">
-                            <span class="banner-icon">💡</span>
-                            <div class="banner-text">
-                                <strong>Temporal Disambiguation for "kal":</strong>
-                                <span id="kalContextExplanation">Inferred as <em>Tomorrow (Future)</em> based on future auxiliary cues.</span>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- 3. Sentiment Analysis Card -->
-                    <section class="feature-card" id="sectionSentiment">
-                        <div class="card-header">
-                            <div class="header-left">
-                                <span class="card-badge sent-badge">SENTIMENT</span>
-                                <h3>Keyword & Rule-Based Sentiment Analysis</h3>
-                            </div>
-                            <div class="sentiment-pill" id="sentimentPill">⚪ Neutral</div>
-                        </div>
-
-                        <div class="sentiment-grid">
-                            <div class="polarity-meter-card">
-                                <span class="meter-title">Polarity Score Spectrum</span>
-                                <div class="spectrum-bar">
-                                    <div class="spectrum-fill" id="spectrumFill"></div>
-                                    <div class="spectrum-indicator" id="spectrumIndicator"></div>
-                                </div>
-                                <div class="spectrum-labels">
-                                    <span>-1.0 (Negative)</span>
-                                    <span>0.0 (Neutral)</span>
-                                    <span>+1.0 (Positive)</span>
-                                </div>
-                                <div class="polarity-number" id="polarityNumber">0.00</div>
-                            </div>
-
-                            <div class="sentiment-breakdown">
-                                <div class="signal-group">
-                                    <span class="signal-label positive">🟢 Positive Signals:</span>
-                                    <div class="signal-tags" id="positiveSignals">
-                                        <span class="no-signals">None</span>
-                                    </div>
-                                </div>
-                                <div class="signal-group">
-                                    <span class="signal-label negative">🔴 Negative Signals:</span>
-                                    <div class="signal-tags" id="negativeSignals">
-                                        <span class="no-signals">None</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="sentiment-alerts" id="sentimentAlerts">
-                            <!-- Negation or intensifier banners -->
-                        </div>
-
-                        <div class="linguistic-explanation">
-                            <strong>Linguistic Reasoning:</strong>
-                            <span id="sentimentReasoning">No sentiment-bearing keywords detected; purely factual message.</span>
-                        </div>
-                    </section>
-
-                    <!-- 4. POS & Language ID Card -->
-                    <section class="feature-card" id="sectionPOS">
-                        <div class="card-header">
-                            <div class="header-left">
-                                <span class="card-badge pos-badge">SYNTAX</span>
-                                <h3>Tokenization, Language ID & Rule-Based POS Tagging</h3>
-                            </div>
-                            <div class="lang-pill-container" id="langPillSummary">
-                                <span class="lang-pill hindi">Hindi: 4</span>
-                                <span class="lang-pill english">English: 1</span>
-                                <span class="lang-pill other">Other: 5</span>
-                            </div>
-                        </div>
-
-                        <div class="token-chips-display" id="tokenChipsDisplay">
-                            <!-- Visual tokens with POS badges -->
-                        </div>
-
-                        <div class="table-card">
-                            <table class="data-table" id="posTable">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Token</th>
-                                        <th>Identified Language</th>
-                                        <th>Assigned POS Tag</th>
-                                        <th>Tag Category</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="posTableBody">
-                                    <!-- Injected -->
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="linguistic-explanation">
-                            <strong>Summary:</strong>
-                            <span id="posSummaryText">Loading summary...</span>
-                        </div>
-                    </section>
-                </div>
-
-                <!-- Dataset Explorer View (Hidden by default, shown when datasets feature selected) -->
-                <div class="dataset-view" id="datasetView" style="display:none;">
-                    <div class="dataset-header-card">
-                        <div class="dataset-selector-row">
-                            <div class="selector-group">
-                                <label for="datasetSelect">Select Dataset:</label>
-                                <select id="datasetSelect" class="modern-select">
-                                    <option value="ner">🏷️ Named Entity Recognition (NER) Dataset (50 sentences)</option>
-                                    <option value="sentiment">🎭 Sentiment Analysis Dataset (50 sentences)</option>
-                                    <option value="translation">🔄 Translation Dataset (55+ pairs)</option>
-                                    <option value="sample">📝 Sample Hinglish Corpus (20 sentences)</option>
-                                </select>
-                            </div>
-                            <div class="search-group">
-                                <input type="text" id="datasetSearchInput" class="modern-search" placeholder="Search keywords in dataset...">
-                            </div>
-                        </div>
-
-                        <div class="dataset-meta-row">
-                            <span id="datasetRecordCount" class="record-count">Total: 50 records</span>
-                            <span class="dataset-note">Curated specifically for Hinglish natural language processing research.</span>
-                        </div>
-                    </div>
-
-                    <div class="table-card dataset-table-card">
-                        <table class="data-table" id="datasetDataTable">
-                            <thead id="datasetTableHead">
-                                <!-- Headers injected -->
-                            </thead>
-                            <tbody id="datasetTableBody">
-                                <!-- Rows injected -->
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
@@ -401,7 +401,7 @@
     </div>
 
     <!-- Notification Toast -->
-    <div id="toast" class="toast">Copied to clipboard!</div>
+    <div id="toast" class="toast">Action completed</div>
 
     <script src="app.js"></script>
 </body>
